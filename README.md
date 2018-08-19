@@ -1,24 +1,16 @@
-# README
+Ruby on Rails: Sample application
+=================================
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Configurations
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+| Name | Default | Description |
+|---|---|---|
+| `MEMCACHED_HOST` | `127.0.0.1` | |
+| `MYSQL_DATABASE` | `demo` | |
+| `MYSQL_HOST` | `127.0.0.1` | |
+| `MYSQL_PASSWORD` | | |
+| `MYSQL_USERNAME` | `root` | |
+| `RAILS_MAX_THREADS` | `5` | |
+| `REDIS_DATABASE` | `0` | |
+| `REDIS_HOST` | `127.0.0.1` | |
+| `REDIS_PORT` | `6379` | |

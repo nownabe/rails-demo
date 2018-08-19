@@ -29,5 +29,9 @@ module Demo
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.active_job.queue_adapter = :sidekiq
+
+    config.cache_store = :dalli_store, ENV.fetch("MEMCACHED_HOST", "127.0.0.1")
   end
 end

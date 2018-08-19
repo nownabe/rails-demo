@@ -1,0 +1,55 @@
+version: '3'
+
+services:
+
+  puma:
+    build:
+      context: .
+    command: [
+      "bin/dev",
+      "--db",
+      "bin/rails", "s",
+      "-p", "3000",
+      "-b", "0.0.0.0"
+    ]
+    environment:
+      - MEMCACHED_HOST=127.0.0.1
+      - MYSQL_HOST=mysql
+      - MYSQL_PASSWORD=password
+      - REDIS_HOST=redis
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/usr/src/app
+
+  sidekiq:
+    build:
+      context: .
+    command: [
+      "bin/dev",
+      "bundle", "exec", "sidekiq"
+    ]
+    environment:
+      - MEMCACHED_HOST=127.0.0.1
+      - MYSQL_HOST=mysql
+      - MYSQL_PASSWORD=password
+      - REDIS_HOST=redis
+    volumes:
+      - .:/usr/src/app
+
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - 3306:3306
+
+  redis:
+    image: redis:4-alpine
+    ports:
+      - 6379:6379
+
+  memcached:
+    image: memcached:1.5-alpine
+    ports:
+      - 11211:11211

@@ -1,0 +1,19 @@
+#!/bin/bash
+
+bundle install
+
+if [[ "$1" = "--db" ]]; then
+  shift
+
+  if ! bin/rails db:version >/dev/null 2>&1; then
+    bin/rails db:create db:schema:load db:seed_fu
+  fi
+
+  if bin/rails db:migrate:status 2>/dev/null | egrep -q '^\s+down'; then
+    bin/rails db:migrate
+  fi
+fi
+
+rm -f tmp/pids/server.pid
+
+$@
